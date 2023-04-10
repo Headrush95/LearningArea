@@ -6,11 +6,13 @@ import (
 	"math"
 )
 
+// BiLinkedList двусвязный список с верхним и нижним ограничителем
 type BiLinkedList struct {
 	Top    *Cell
 	Bottom *Cell
 }
 
+// Cell ячейка двусвязного списка
 type Cell struct {
 	Value int
 	Next  *Cell

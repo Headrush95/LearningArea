@@ -6,11 +6,13 @@ import (
 	"unicode/utf8"
 )
 
+// center вспомогательная функция для PrintMatrix, чтобы центрировать элементы
 func center(a int, w int) string {
 	s := strconv.Itoa(a)
 	return fmt.Sprintf("%*s", -w, fmt.Sprintf("%*s", (w+len(s))/2, s))
 }
 
+// PrintMatrix печатает в Stdout двумерную матрицу
 func PrintMatrix(m [][]int) {
 	for i := 0; i < len(m); i++ {
 		for j := 0; j < len(m[i]); j++ {
@@ -20,13 +22,15 @@ func PrintMatrix(m [][]int) {
 	}
 }
 
-func GetMin(x, y int) int {
+// getMin возвращает наименьшее значение для данных типа int
+func getMin(x, y int) int {
 	if x > y {
 		return y
 	}
 	return x
 }
 
+// LevDist реализует алгоритм Левенштейна по поиску наименьшего количества изменений одного (comp) слова, чтобы получить второе (org)
 func LevDist(org string, comp string) int {
 	lOrg := utf8.RuneCountInString(org)
 	lComp := utf8.RuneCountInString(comp)
@@ -47,12 +51,12 @@ func LevDist(org string, comp string) int {
 	for i := 1; i <= lOrg; i++ {
 		for j := 1; j <= lComp; j++ {
 			var diagInc = 0
-			matrix[i][j] = GetMin(matrix[i-1][j]+1, matrix[i][j-1]+1)
+			matrix[i][j] = getMin(matrix[i-1][j]+1, matrix[i][j-1]+1)
 			var isSameLetter = orgRune[i-1] == compRune[j-1]
 			if !isSameLetter {
 				diagInc = 1
 			}
-			matrix[i][j] = GetMin(matrix[i][j], matrix[i-1][j-1]+diagInc)
+			matrix[i][j] = getMin(matrix[i][j], matrix[i-1][j-1]+diagInc)
 		}
 	}
 

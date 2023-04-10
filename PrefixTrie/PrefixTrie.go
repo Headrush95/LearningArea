@@ -2,6 +2,7 @@ package PrefixTrie
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	"sync"
 )
@@ -96,7 +97,7 @@ func (this *Trie) Search(prefix string, maxCountOfWords int) []string {
 // depthSearch is sub method. Search in trie in depth
 func (this *Trie) depthSearch(result *[]string, modPrefix string, countOfWords *int, maxCountOfWords *int, wg *sync.WaitGroup, mtx *sync.Mutex) {
 	if *countOfWords > *maxCountOfWords-1 {
-		fmt.Println("[INFO] the number of matching words is greater than the set maximum")
+		log.Println("[INFO] the number of matching words is greater than the set maximum")
 		return
 	}
 	isLeaf := true

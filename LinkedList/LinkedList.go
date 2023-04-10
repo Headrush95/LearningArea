@@ -6,11 +6,13 @@ import (
 	"math"
 )
 
+// LinkedList связный список с верхним и нижним ограничителями
 type LinkedList struct {
 	Top    *Cell
 	Bottom *Cell
 }
 
+// Cell ячейка связного списка
 type Cell struct {
 	Value int
 	Next  *Cell
@@ -85,6 +87,7 @@ func (ll *LinkedList) Print() error {
 	return nil
 }
 
+// Max возвращает максимальное значение в связном спике
 func (ll *LinkedList) Max() int {
 	next := ll.Top.Next
 	max := ll.Top.Value
@@ -97,6 +100,7 @@ func (ll *LinkedList) Max() int {
 	return max
 }
 
+// IsSorted возвращет true, если элементы в связном списке отсортированны
 func (ll *LinkedList) IsSorted() bool {
 	next := ll.Top
 	for next != ll.Bottom {
