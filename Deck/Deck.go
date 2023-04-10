@@ -31,7 +31,7 @@ func NewDeck() *Deck {
 	return &Deck{topLow, 0, topHigh, 0}
 }
 
-// Enqueue добавляет элемент в очеред в зависимости от приоритета
+// Enqueue добавляет элемент в очеред в зависимости от приоритета (low или high)
 func (d *Deck) Enqueue(val int, priority string) (err error) {
 	// проверка на валидность приоритета
 	if priority != "low" && priority != "high" {
