@@ -8,19 +8,19 @@ var rightPartEmpty = errors.New("right part of double stack is empty")
 
 // DoubleStack двойная очередь для типа int, элементы добавляются с двух концов
 type DoubleStack struct {
-	values     []int
+	values     []any
 	indexLeft  int
 	indexRight int
 }
 
 // NewDoubleStack создает новый двойной стек для элементов типа int
 func NewDoubleStack(size int) *DoubleStack {
-	values := make([]int, size, size)
+	values := make([]any, size, size)
 	return &DoubleStack{values, 0, len(values) - 1}
 }
 
 // PushLeft добавляет элемент в левую часть очереди
-func (d *DoubleStack) PushLeft(val int) (err error) {
+func (d *DoubleStack) PushLeft(val any) (err error) {
 	// проверка на переполнение очереди
 	if d.indexLeft > d.indexRight {
 		err = doubleStackIsFull
@@ -33,7 +33,7 @@ func (d *DoubleStack) PushLeft(val int) (err error) {
 }
 
 // PushRight добавляет элемент в правую часть очереди
-func (d *DoubleStack) PushRight(val int) (err error) {
+func (d *DoubleStack) PushRight(val any) (err error) {
 	// проверка на переполнение очереди
 	if d.indexLeft > d.indexRight {
 		err = doubleStackIsFull
@@ -46,7 +46,7 @@ func (d *DoubleStack) PushRight(val int) (err error) {
 }
 
 // PopLeft забирает элемент из левой части очереди
-func (d *DoubleStack) PopLeft() (out int, err error) {
+func (d *DoubleStack) PopLeft() (out any, err error) {
 	// проверка на наличие элементов в левой части очереди
 	if d.indexLeft == 0 {
 		err = leftPartEmpty
@@ -60,7 +60,7 @@ func (d *DoubleStack) PopLeft() (out int, err error) {
 }
 
 // PopRight забирает элемент из правой части очереди
-func (d *DoubleStack) PopRight() (out int, err error) {
+func (d *DoubleStack) PopRight() (out any, err error) {
 	// проверка на наличие элементов в правой части очереди
 	if d.indexRight == len(d.values)-1 {
 		err = rightPartEmpty
@@ -74,7 +74,7 @@ func (d *DoubleStack) PopRight() (out int, err error) {
 }
 
 // TopLeft показывает верхний элемент слева
-func (d *DoubleStack) TopLeft() (top int, err error) {
+func (d *DoubleStack) TopLeft() (top any, err error) {
 	// проверка на наличие элементов в левой части очереди
 	if d.indexLeft == 0 {
 		err = leftPartEmpty
@@ -86,7 +86,7 @@ func (d *DoubleStack) TopLeft() (top int, err error) {
 }
 
 // TopRight показывает верхний элемент справа
-func (d *DoubleStack) TopRight() (top int, err error) {
+func (d *DoubleStack) TopRight() (top any, err error) {
 	// проверка на наличие элементов в правой части очереди
 	if d.indexRight == len(d.values)-1 {
 		err = rightPartEmpty

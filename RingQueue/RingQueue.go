@@ -7,7 +7,7 @@ var emptyQueueError = errors.New("queue is empty")
 
 // RingQueue кольцевая очередь для элементов типа int
 type RingQueue struct {
-	values []int // содержит значения в очереди
+	values []any // содержит значения в очереди
 	next   int   // указывает на следующий элемент для постановки в очередь
 	last   int   // указывает на последний элемент в очереди
 	length int   // тукущая длина кольца
@@ -15,11 +15,11 @@ type RingQueue struct {
 
 // NewRingQueue создает новую очередь
 func NewRingQueue(size int) *RingQueue {
-	return &RingQueue{make([]int, size, size), 0, 0, 0}
+	return &RingQueue{make([]any, size, size), 0, 0, 0}
 }
 
 // Enqueue добавляет элемент в очередь
-func (rq *RingQueue) Enqueue(val int) (err error) {
+func (rq *RingQueue) Enqueue(val any) (err error) {
 	// если очередь полна, то возвращаем ошибку
 	if rq.length == len(rq.values) {
 		return capacityError
@@ -32,7 +32,7 @@ func (rq *RingQueue) Enqueue(val int) (err error) {
 }
 
 // Dequeue забирает элемент из очереди
-func (rq *RingQueue) Dequeue() (out int, err error) {
+func (rq *RingQueue) Dequeue() (out any, err error) {
 	// если очередь пустая, возвращаем ошибку
 	if rq.length == 0 {
 		err = emptyQueueError
@@ -47,7 +47,7 @@ func (rq *RingQueue) Dequeue() (out int, err error) {
 }
 
 // Top показывает следующий элемент в очереди
-func (rq *RingQueue) Top() (top int, err error) {
+func (rq *RingQueue) Top() (top any, err error) {
 	// если очередь пустая, возвращаем ошибку
 	if rq.length == 0 {
 		err = emptyQueueError

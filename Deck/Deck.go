@@ -18,7 +18,7 @@ type Deck struct {
 }
 
 type Cell struct {
-	value int
+	value any
 	next  *Cell
 	prev  *Cell
 }
@@ -32,7 +32,7 @@ func NewDeck() *Deck {
 }
 
 // Enqueue добавляет элемент в очеред в зависимости от приоритета (low или high)
-func (d *Deck) Enqueue(val int, priority string) (err error) {
+func (d *Deck) Enqueue(val any, priority string) (err error) {
 	// проверка на валидность приоритета
 	if priority != "low" && priority != "high" {
 		err = invalidPriority
@@ -66,7 +66,7 @@ func (d *Deck) Enqueue(val int, priority string) (err error) {
 }
 
 // DequeueLow забирает элемент с низким приоритетом
-func (d *Deck) DequeueLow() (out int, err error) {
+func (d *Deck) DequeueLow() (out any, err error) {
 	// проверяем есть ли что забрать
 	if d.LowPriorityCellCount == 0 {
 		err = emptyLowPriorityQueue
@@ -84,7 +84,7 @@ func (d *Deck) DequeueLow() (out int, err error) {
 }
 
 // DequeueHigh забирает элемент с высоким приоритетом
-func (d *Deck) DequeueHigh() (out int, err error) {
+func (d *Deck) DequeueHigh() (out any, err error) {
 	// проверяем есть ли что забрать
 	if d.HighPriorityCellCount == 0 {
 		err = emptyHighPriorityQueue

@@ -1,5 +1,5 @@
 /*
-PriorityQueue демонстрирует приоритетную очередь,
+Package PriorityQueue демонстрирует приоритетную очередь,
 построенную с использованием интерфейса heap
 */
 package PriorityQueue
@@ -12,7 +12,7 @@ import (
 
 // Item - это то, чем мы управляем в приоритетной очереди.
 type Item struct {
-	value    int // Значение элемента; произвольное.
+	value    any // Значение элемента; произвольное.
 	priority int // Приоритет элемента в очереди.
 	// Индекс необходим для обновления
 	// и поддерживается методами heap.Interface.
@@ -24,28 +24,26 @@ type PriorityQueue []*Item
 
 func (pq *PriorityQueue) Len() int { return len(*pq) }
 
-func (pq PriorityQueue) Less(i, j int) bool {
-	// We want Pop to give us the highest, not lowest, priority so we use greater than here.
-	// Мы хотим, чтобы Pop давал нам самый высокий,
-	// а не самый низкий приоритет,
-	// поэтому здесь мы используем оператор больше.
-	return pq[i].priority < pq[j].priority
+func (pq *PriorityQueue) Less(i, j int) bool {
+	return (*pq)[i].priority < (*pq)[j].priority
 }
 
-func (pq PriorityQueue) Swap(i, j int) {
-	pq[i], pq[j] = pq[j], pq[i]
-	pq[i].index = i
-	pq[j].index = j
+func (pq *PriorityQueue) Swap(i, j int) {
+	(*pq)[i], (*pq)[j] = (*pq)[j], (*pq)[i]
+	(*pq)[i].index = i
+	(*pq)[j].index = j
 }
 
-func (pq *PriorityQueue) Push(x interface{}) {
+// Push помещает элемент в очередь с приоритетом
+func (pq *PriorityQueue) Push(x any) {
 	n := len(*pq)
 	item := x.(*Item)
 	item.index = n
 	*pq = append(*pq, item)
 }
 
-func (pq *PriorityQueue) Pop() interface{} {
+// Pop забирает элемент из очереди с приоритетом
+func (pq *PriorityQueue) Pop() any {
 	old := *pq
 	n := len(old)
 	item := old[n-1]
@@ -56,7 +54,7 @@ func (pq *PriorityQueue) Pop() interface{} {
 }
 
 // update изменяет приоритет и значение Item в очереди.
-func (pq *PriorityQueue) update(item *Item, value int, priority int) {
+func (pq *PriorityQueue) update(item *Item, value any, priority int) {
 	item.value = value
 	item.priority = priority
 	heap.Fix(pq, item.index)
