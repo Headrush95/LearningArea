@@ -5,7 +5,7 @@ import "errors"
 var capacityError = errors.New("queue is full")
 var emptyQueueError = errors.New("queue is empty")
 
-// RingQueue кольцевая очередь для элементов типа int
+// RingQueue кольцевая очередь для элементов любого типа
 type RingQueue struct {
 	values []any // содержит значения в очереди
 	next   int   // указывает на следующий элемент для постановки в очередь

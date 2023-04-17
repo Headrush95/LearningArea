@@ -6,7 +6,7 @@ var doubleStackIsFull = errors.New("double stack is full")
 var leftPartEmpty = errors.New("left part of double stack is empty")
 var rightPartEmpty = errors.New("right part of double stack is empty")
 
-// DoubleStack двойная очередь для типа int, элементы добавляются с двух концов
+// DoubleStack двойная очередь для любых элементов. Элементы добавляются с двух концов
 type DoubleStack struct {
 	values     []any
 	indexLeft  int

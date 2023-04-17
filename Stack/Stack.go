@@ -8,7 +8,7 @@ var stackIsEmpty = errors.New("stack is empty")
 var stackOverFlow = errors.New("stack overflow")
 var invalidType = errors.New("invalid type of element. Need integer")
 
-// Stack для элементов типа int
+// Stack для элементов любого типа
 type Stack struct {
 	values []any
 	length int // длина
