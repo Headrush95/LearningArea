@@ -57,3 +57,8 @@ func (rq *RingQueue) Top() (top any, err error) {
 	top = rq.values[rq.last]
 	return
 }
+
+// Len возвращает длину очереди
+func (rq *RingQueue) Len() (length int) {
+	return rq.length
+}
